@@ -140,12 +140,32 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#080808",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* Header */}
-      <header className="bg-accent px-6 py-6">
-        <div className="max-w-2xl mx-auto">
-          <a href="/" className="inline-block">
-            <span className="text-white font-display text-xl font-bold tracking-tight">
+      <header
+        style={{
+          background: "#CEFF65",
+          padding: "24px",
+        }}
+      >
+        <div style={{ maxWidth: "672px", marginLeft: "auto", marginRight: "auto" }}>
+          <a href="/" style={{ display: "inline-block", textDecoration: "none" }}>
+            <span
+              style={{
+                color: "#080808",
+                fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+                fontSize: "1.25rem",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+              }}
+            >
               PrepAiro
             </span>
           </a>
@@ -153,47 +173,75 @@ export default function OnboardingPage() {
       </header>
 
       {/* Progress Section */}
-      <div className="bg-accent px-6 pb-8 rounded-b-3xl">
-        <div className="max-w-2xl mx-auto text-center">
-          <h1 className={`font-display text-2xl md:text-3xl font-bold text-white ${step >= 3 ? "mb-6" : ""}`}>
-            CAT Prep Doesn&apos;t Have To Suck
+      <div
+        style={{
+          background: "#CEFF65",
+          padding: "0 24px 32px 24px",
+          borderBottomLeftRadius: "24px",
+          borderBottomRightRadius: "24px",
+        }}
+      >
+        <div style={{ maxWidth: "672px", marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
+          <h1
+            style={{
+              fontFamily: "var(--font-space-grotesk), system-ui, sans-serif",
+              fontSize: "clamp(1.5rem, 4vw, 1.875rem)",
+              fontWeight: 700,
+              color: "#080808",
+              marginBottom: step >= 3 ? "24px" : "0",
+            }}
+          >
+            SAT Prep Doesn&apos;t Have To Suck
           </h1>
 
           {/* Step Indicators - Only show after OTP verification (step 3+) */}
           {step >= 3 && (
-            <div className="flex items-center justify-center gap-4 mt-6">
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginTop: "24px" }}>
               {steps.map((s, index) => {
                 const visualStep = getVisualStep();
                 const isCompleted = visualStep > s.id;
                 const isCurrent = visualStep === s.id;
 
                 return (
-                  <div key={s.id} className="flex items-center gap-4">
-                    <div className="flex items-center gap-2">
+                  <div key={s.id} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                       <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
-                          isCompleted
-                            ? "bg-white text-accent"
-                            : isCurrent
-                            ? "bg-white text-accent"
-                            : "bg-white/20 text-white/60"
-                        }`}
+                        style={{
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "50%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "14px",
+                          fontWeight: 600,
+                          transition: "all 0.2s",
+                          background: isCompleted || isCurrent ? "#080808" : "rgba(8,8,8,0.2)",
+                          color: isCompleted || isCurrent ? "#CEFF65" : "rgba(8,8,8,0.6)",
+                        }}
                       >
                         {isCompleted ? <Check size={14} /> : s.id}
                       </div>
                       <span
-                        className={`text-sm font-medium hidden sm:inline ${
-                          isCurrent || isCompleted ? "text-white" : "text-white/60"
-                        }`}
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: 500,
+                          color: isCurrent || isCompleted ? "#080808" : "rgba(8,8,8,0.6)",
+                          display: "none",
+                        }}
+                        className="step-label"
                       >
                         {s.label}
                       </span>
                     </div>
                     {index < steps.length - 1 && (
                       <div
-                        className={`w-12 h-0.5 rounded-full ${
-                          isCompleted ? "bg-white" : "bg-white/20"
-                        }`}
+                        style={{
+                          width: "48px",
+                          height: "2px",
+                          borderRadius: "9999px",
+                          background: isCompleted ? "#080808" : "rgba(8,8,8,0.2)",
+                        }}
                       />
                     )}
                   </div>
@@ -205,8 +253,17 @@ export default function OnboardingPage() {
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-start justify-center px-6 py-8 overflow-y-auto">
-        <div className="w-full max-w-md">
+      <main
+        style={{
+          flex: 1,
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "center",
+          padding: "32px 24px",
+          overflowY: "auto",
+        }}
+      >
+        <div style={{ width: "100%", maxWidth: "448px" }}>
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={step}
@@ -216,13 +273,27 @@ export default function OnboardingPage() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="bg-surface rounded-2xl p-6 sm:p-8 shadow-lg border border-border"
+              style={{
+                background: "#151515",
+                borderRadius: "16px",
+                padding: "24px",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+                border: "1px solid #1F2937",
+              }}
             >
               {renderStep()}
             </motion.div>
           </AnimatePresence>
         </div>
       </main>
+
+      <style jsx global>{`
+        @media (min-width: 640px) {
+          .step-label {
+            display: inline !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
