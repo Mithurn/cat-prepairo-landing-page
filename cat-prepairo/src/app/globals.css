@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  /* Background & Foreground - Warm off-white theme */
+  --background: #FAF9F6;
+  --background-alt: #F5F4F0;
+  --foreground: #1A1A1A;
+  --foreground-muted: #4A4A4A;
+  --foreground-subtle: #6B6B6B;
+
+  /* Deep Muted Amber - Primary Accent */
+  --accent: #B8860B;
+  --accent-hover: #9A7209;
+  --accent-light: #D4A833;
+
+  /* Borders & Surfaces */
+  --border: #E5E3DE;
+  --border-strong: #D1CFC8;
+  --surface: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+
+  /* Semantic Colors */
+  --success: #2D6A4F;
+  --info: #1E6091;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-success: var(--success);
+  --color-info: var(--info);
+  --transparent: transparent;
+
+  /* Typography */
+  --font-sans: var(--font-lexend), system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-lexend), system-ui, sans-serif;
+
+  /* Spacing Scale */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Animations */
+  --animate-grid: grid 15s linear infinite;
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+}
+
+/* Retro Grid Animation */
+@keyframes grid {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Marquee Animations */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+/* Base Styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/* Display Font for Headlines */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Selection Color */
+::selection {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus Styles */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-subtle);
+}
