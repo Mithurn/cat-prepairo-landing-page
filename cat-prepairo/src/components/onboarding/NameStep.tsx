@@ -16,11 +16,16 @@ export default function NameStep({ data, updateData, onNext }: NameStepProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.trim().length < 2) {
+    const trimmed = name.trim();
+    if (trimmed.length < 2) {
       setError("Please enter your name");
       return;
     }
-    updateData({ name: name.trim() });
+    if (/^\d+$/.test(trimmed)) {
+      setError("Please enter a valid name");
+      return;
+    }
+    updateData({ name: trimmed });
     onNext();
   };
 
@@ -39,6 +44,7 @@ export default function NameStep({ data, updateData, onNext }: NameStepProps) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter your name"
+          autoComplete="name"
           className="w-full px-4 py-3.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-foreground placeholder:text-foreground-muted/50"
           autoFocus
         />
